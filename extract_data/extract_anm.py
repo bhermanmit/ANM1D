@@ -13,9 +13,9 @@ class MeshData:
         self.sp = sp
         self.name = name
 
-    def extract_mean(self,tally_id,score_id):
+    def extract_mean(self,tally_id,score_id,nuclide_id=-1):
         # extract results
-        results = self.sp.extract_results(tally_id,score_id)
+        results = self.sp.extract_results(tally_id,score_id,nuclide_id)
 
         # copy means over
         mean = results['mean'].copy()
@@ -84,20 +84,64 @@ class MeshData:
 
     def write_matlab_binary(self):
         mdict = { 'flux':self.flux,
+                  'meshflux':self.meshflux,
+                  'meshnsf':self.meshnufission,
                   'sigt':self.totxs,
                   'sigs':self.scat,
                   'nsigf':self.nfissvec,
                   'chi':self.chi,
                   'diff':self.diff,
                   'curr':self.curr,
-                  'keff':self.keff  }
+                  'keff':self.keff,
+                  'H1totalrate':self.H1totalrate,
+                  'totalrate':self.totalrate,
+                  'H1p1rate':self.H1p1rate,
+                  'p1rate':self.p1rate,
+                  'fluxrate':self.fluxrate }
         scipy.io.savemat(self.name+'.mat',mdict,appendmat=False)
 
+    def process_meshflux(self,tally_id,score_id):
+        self.meshflux = self.extract_mean(tally_id,score_id)
+        self.meshflux = self.meshflux[:,:,0,0]
+        for i in range(np.size(self.meshflux,1)):
+            self.meshflux[:,i] = self.meshflux[::-1,i]
 
-def main(statepoint_id):
+    def process_meshnufission(self,tally_id,score_id):
+        self.meshnufission = self.extract_mean(tally_id,score_id)
+        self.meshnufission = self.meshnufission[:,:,0,0]
+        for i in range(np.size(self.meshnufission,1)):
+            self.meshnufission[:,i] = self.meshnufission[::-1,i]
+
+    def process_H1totalrate(self,tally_id,score_id,nuclide_id=-1):
+        self.H1totalrate = self.extract_mean(tally_id,score_id,nuclide_id)
+        self.H1totalrate = self.H1totalrate[:,0,0,0]
+        self.H1totalrate = self.H1totalrate[::-1]
+
+    def process_totalrate(self,tally_id,score_id,nuclide_id=-1):
+        self.totalrate = self.extract_mean(tally_id,score_id,nuclide_id)
+        self.totalrate = self.totalrate[:,0,0,0]
+        self.totalrate = self.totalrate[::-1]
+
+    def process_H1p1rate(self,tally_id,score_id,nuclide_id=-1):
+        self.H1p1rate = self.extract_mean(tally_id,score_id,nuclide_id)
+        self.H1p1rate = self.H1p1rate[:,0,0,0]
+        self.H1p1rate = self.H1p1rate[::-1]
+
+    def process_p1rate(self,tally_id,score_id,nuclide_id=-1):
+        self.p1rate = self.extract_mean(tally_id,score_id,nuclide_id)
+        self.p1rate = self.p1rate[:,0,0,0]
+        self.p1rate = self.p1rate[::-1]
+
+    def process_fluxrate(self,tally_id,score_id,nuclide_id=-1):
+        self.fluxrate = self.extract_mean(tally_id,score_id,nuclide_id)
+        self.fluxrate = self.fluxrate[:,0,0,0]
+        self.fluxrate = self.fluxrate[::-1]
+
+
+def main(statepoint_file):
 
     # read in statepoint file
-    sp = statepoint.StatePoint('statepoint.'+statepoint_id+'.binary')
+    sp = statepoint.StatePoint(statepoint_file)
     sp.read_results()
 
     # create mesh data objects
@@ -112,6 +156,13 @@ def main(statepoint_id):
     reg1.process_nufissmat(3,'nu-fission')
     reg1.calc_nfissvec()
     reg1.process_current(5,'current','right')
+    reg1.process_meshflux(11,'flux')
+    reg1.process_meshnufission(11,'nu-fission')
+    reg1.process_H1totalrate(7,'total',1001)
+    reg1.process_totalrate(7,'total')
+    reg1.process_H1p1rate(7,'scatter-n',1001)
+    reg1.process_p1rate(7,'scatter-n')
+    reg1.process_fluxrate(9,'flux')
 
     # read in right mesh tallies
     reg2.process_flux(2,'flux')
@@ -121,6 +172,13 @@ def main(statepoint_id):
     reg2.process_nufissmat(4,'nu-fission')
     reg2.calc_nfissvec()
     reg2.process_current(6,'current','left')
+    reg2.process_meshflux(11,'flux')
+    reg2.process_meshnufission(11,'nu-fission')
+    reg2.process_H1totalrate(8,'total',1001)
+    reg2.process_totalrate(8,'total')
+    reg2.process_H1p1rate(8,'scatter-n',1001)
+    reg2.process_p1rate(8,'scatter-n')
+    reg2.process_fluxrate(10,'flux')
 
     # calculate keff from tallies
     keff = calc_keff(reg1,reg2)
@@ -142,5 +200,5 @@ def calc_keff(reg1,reg2):
     return keff
 
 if __name__ == "__main__":
-    statepoint_id = sys.argv[1]
-    main(statepoint_id)
+    statepoint_file = sys.argv[1]
+    main(statepoint_file)

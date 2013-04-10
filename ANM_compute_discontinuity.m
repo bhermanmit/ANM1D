@@ -1,4 +1,8 @@
-function [reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,L1,L2)
+function [reg1,reg2] = ANM_compute_discontinuity(reg1,reg2)
+
+% geometry
+L1 = reg1.L;
+L2 = reg2.L;
 
 % compute removal cross sections
 reg(1).sigr1 = reg1.sigt(1) - reg1.sigs(1,1);

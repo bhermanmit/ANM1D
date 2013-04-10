@@ -29,10 +29,18 @@ class MeshData:
         self.flux = self.extract_mean(tally_id,score_id)
         self.flux = self.flux[:,:,0,0]
         for i in range(np.size(self.flux,1)):
-          self.flux[:,i] = self.flux[::-1,i]
+            self.flux[:,i] = self.flux[::-1,i]
+
+    def process_nufission(self,tally_id,score_id):
+        self.nufission = self.extract_mean(tally_id,score_id)
+        self.nufission = self.nufission[:,:,0,0]
+        for i in range(np.size(self.nufission,1)):
+            self.nufission[:,i] = self.nufission[::-1,i]
 
     def write_matlab_binary(self):
-        mdict = { 'flux':self.flux }
+        mdict = { 'flux':self.flux,
+                  'nufission':self.nufission }
+
         scipy.io.savemat(self.name+'.mat',mdict,appendmat=False)
 
 
@@ -50,9 +58,11 @@ def main(statepoint_file_low, statepoint_file_high):
 
     # read in left mesh tallies
     reg1.process_flux(1,'flux')
+    reg1.process_nufission(1,'nu-fission')
 
     # read in right mesh tallies
     reg2.process_flux(1,'flux')
+    reg2.process_nufission(1,'nu-fission')
 
     # write matlab output binaries
     reg1.write_matlab_binary()

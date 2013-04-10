@@ -1,4 +1,8 @@
-function [reg1,reg2] = ANM_solve_fluxes(reg1,reg2,L1,L2)
+function [reg1,reg2] = ANM_solve_fluxes(reg1,reg2)
+
+% geometry
+L1 = reg1.L;
+L2 = reg2.L;
 
 % compute removal cross sections
 reg(1).sigr1 = reg1.sigt(1) - reg1.sigs(1,1);
@@ -194,11 +198,40 @@ reg(2).phi1 = @(x) reg(2).v11(keff)*reg(2).a*cos(sqrt(reg(2).lamb1(keff))*(x-L2)
 reg(2).phi2 = @(x) reg(2).v21(keff)*reg(2).a*cos(sqrt(reg(2).lamb1(keff))*(x-L2)) + ...
     reg(2).v22(keff)*reg(2).c*cosh(sqrt(-reg(2).lamb2(keff))*(x-L2));
 
+% integral of fluxes
+reg(1).iphi1 = reg(1).v11(keff)*reg(1).a/sqrt(reg(1).lamb1(keff))*sin(sqrt(reg(1).lamb1(keff))*L1) + ...
+    reg(1).v12(keff)*reg(1).c/sqrt(-reg(1).lamb2(keff))*sinh(sqrt(-reg(1).lamb2(keff))*L1);
+reg(1).iphi2 = reg(1).v21(keff)*reg(1).a/sqrt(reg(1).lamb1(keff))*sin(sqrt(reg(1).lamb1(keff))*L1) + ...
+    reg(1).v22(keff)*reg(1).c/sqrt(-reg(1).lamb2(keff))*sinh(sqrt(-reg(1).lamb2(keff))*L1);
+reg(2).iphi1 = reg(2).v11(keff)*reg(2).a/sqrt(reg(2).lamb1(keff))*sin(sqrt(reg(2).lamb1(keff))*L2) + ...
+    reg(2).v12(keff)*reg(2).c/sqrt(-reg(2).lamb2(keff))*sinh(sqrt(-reg(2).lamb2(keff))*L2);
+reg(2).iphi2 = reg(2).v21(keff)*reg(2).a/sqrt(reg(2).lamb1(keff))*sin(sqrt(reg(2).lamb1(keff))*L2) + ...
+    reg(2).v22(keff)*reg(2).c/sqrt(-reg(2).lamb2(keff))*sinh(sqrt(-reg(2).lamb2(keff))*L2);
+
+% integral of fluxes
+reg(1).iphi1 = quad(reg(1).phi1,0,L1,1e-16);
+reg(1).iphi2 = quad(reg(1).phi2,0,L1,1e-16);
+reg(2).iphi1 = quad(reg(2).phi1,0,L2,1e-16);
+reg(2).iphi2 = quad(reg(2).phi2,0,L2,1e-16);
+
+% calculate normalization factor
+norm = (sum(reg1.flux)+sum(reg2.flux))/(reg(1).iphi1+reg(1).iphi2+reg(2).iphi1+reg(2).iphi2);
+
+% adjust fluxes
+reg(1).phi1 = @(x) norm*reg(1).phi1(x);
+reg(1).phi2 = @(x) norm*reg(1).phi2(x);
+reg(2).phi1 = @(x) norm*reg(2).phi1(x);
+reg(2).phi2 = @(x) norm*reg(2).phi2(x);
+
 % save fluxes in output object
 reg1.ANMphi1 = reg(1).phi1;
 reg1.ANMphi2 = reg(1).phi2;
 reg2.ANMphi1 = reg(2).phi1;
 reg2.ANMphi2 = reg(2).phi2;
+reg1.iphi1 = reg(1).iphi1*norm;
+reg1.iphi2 = reg(1).iphi2*norm;
+reg2.iphi1 = reg(2).iphi1*norm;
+reg2.iphi2 = reg(2).iphi2*norm;
 reg1.ANMkeff = keff;
 reg2.ANMkeff = keff;
 

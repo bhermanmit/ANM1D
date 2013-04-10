@@ -18,15 +18,4 @@ reg1.fluxrecon(2,:) = reg1.fluxrecon(2,:)*reg1.iphi2/sum(reg1.fluxrecon(2,:)*dx1
 reg2.fluxrecon(1,:) = reg2.fluxrecon(1,:)*reg2.iphi1/sum(reg2.fluxrecon(1,:)*dx2);
 reg2.fluxrecon(2,:) = reg2.fluxrecon(2,:)*reg2.iphi2/sum(reg2.fluxrecon(2,:)*dx2);
 
-figure(5)
-plot(x1,reg1.fluxrecon(1,:));
-hold on
-plot(x2 + reg1.L, reg2.fluxrecon(1,:), 'r');
-
-figure(6)
-plot(x1,reg1.fluxrecon(2,:));
-hold on
-plot(x2 + reg1.L, reg2.fluxrecon(2,:), 'r');
-
-
 end
