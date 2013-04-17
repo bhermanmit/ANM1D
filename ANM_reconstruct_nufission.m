@@ -5,11 +5,24 @@ dx1 = reg1.L/8;
 dx2 = reg2.L/8;
 
 % compute nu-fission mesh
+% for i = 1:8
+%     reg1.nsfpinrate(:,i) = sum(reg1.form.nufission(:,1+(i-1)*20:i*20),2);
+%     reg1.fluxpinrate(:,i) = sum(reg1.form.flux(:,1+(i-1)*20:i*20),2);
+%     reg2.nsfpinrate(:,i) = sum(reg2.form.nufission(:,1+(i-1)*20:i*20),2);
+%     reg2.fluxpinrate(:,i) = sum(reg2.form.flux(:,1+(i-1)*20:i*20),2);
+%     
+%     reg1.nsfMCpinrate(:,i) = sum(reg1.meshnsf(:,1+(i-1)*20:i*20),2);
+%     j = i + 8;
+%     reg1.nsfMCpinrate(:,j) = sum(reg1.meshnsf(:,1+(j-1)*20:j*20),2);
+% end
+% reg2.nsfMCpinrate = reg1.nsfMCpinrate;
+
 for i = 1:8
-    reg1.nsfpinrate(:,i) = sum(reg1.form.nufission(:,1+(i-1)*20:i*20),2);
-    reg1.fluxpinrate(:,i) = sum(reg1.form.flux(:,1+(i-1)*20:i*20),2);
-    reg2.nsfpinrate(:,i) = sum(reg2.form.nufission(:,1+(i-1)*20:i*20),2);
-    reg2.fluxpinrate(:,i) = sum(reg2.form.flux(:,1+(i-1)*20:i*20),2);
+    reg1.nsfpinrate(:,i) = sum(reg1.meshnsf(:,1+(i-1)*20:i*20),2);
+    reg1.fluxpinrate(:,i) = sum(reg1.meshflux(:,1+(i-1)*20:i*20),2);
+    j = i+8;
+    reg2.nsfpinrate(:,i) = sum(reg2.meshnsf(:,1+(j-1)*20:j*20),2);
+    reg2.fluxpinrate(:,i) = sum(reg2.meshflux(:,1+(j-1)*20:j*20),2);
     
     reg1.nsfMCpinrate(:,i) = sum(reg1.meshnsf(:,1+(i-1)*20:i*20),2);
     j = i + 8;
@@ -60,6 +73,6 @@ reg2.MCpinpower = reg2.MCpinpower*16/sum(reg2.MCpinpower);
 
 % computer L2 norm error
 diff = [reg1.pinpower,reg2.pinpower] - reg1.MCpinpower;
-err = sqrt(sum(diff.^2))*100;
+err = sqrt((1/16)*sum(diff.^2))*100;
 
 end

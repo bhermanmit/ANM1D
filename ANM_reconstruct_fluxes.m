@@ -18,4 +18,21 @@ reg1.fluxrecon(2,:) = reg1.fluxrecon(2,:)*reg1.iphi2/sum(reg1.fluxrecon(2,:)*dx1
 reg2.fluxrecon(1,:) = reg2.fluxrecon(1,:)*reg2.iphi1/sum(reg2.fluxrecon(1,:)*dx2);
 reg2.fluxrecon(2,:) = reg2.fluxrecon(2,:)*reg2.iphi2/sum(reg2.fluxrecon(2,:)*dx2);
 
+% get target homogeneous flux
+reg1formflux1 = reg1.form.flux(1,:)/sum(reg1.form.flux(1,:))*sum(reg1.meshflux(1,1:160));
+reg1formflux2 = reg1.form.flux(2,:)/sum(reg1.form.flux(2,:))*sum(reg1.meshflux(2,1:160));
+reg2formflux1 = reg2.form.flux(1,:)/sum(reg2.form.flux(1,:))*sum(reg2.meshflux(1,1:160));
+reg2formflux2 = reg2.form.flux(2,:)/sum(reg2.form.flux(2,:))*sum(reg2.meshflux(2,1:160));
+
+reg1.homflux(1,:) = reg1.meshflux(1,1:160)./reg1formflux1;
+reg1.homflux(2,:) = reg1.meshflux(2,1:160)./reg1formflux2;
+reg2.homflux(1,:) = reg2.meshflux(1,161:320)./reg2formflux1;
+reg2.homflux(2,:) = reg2.meshflux(2,161:320)./reg2formflux2;
+
+% renormalize target homogeneous flux
+reg1.homflux(1,:) = reg1.homflux(1,:)*reg1.iphi1/sum(reg1.homflux(1,:)*dx1);
+reg1.homflux(2,:) = reg1.homflux(2,:)*reg1.iphi2/sum(reg1.homflux(2,:)*dx1);
+reg2.homflux(1,:) = reg2.homflux(1,:)*reg2.iphi1/sum(reg2.homflux(1,:)*dx2);
+reg2.homflux(2,:) = reg2.homflux(2,:)*reg2.iphi2/sum(reg2.homflux(2,:)*dx2);
+
 end
