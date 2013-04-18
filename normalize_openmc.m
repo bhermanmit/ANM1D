@@ -1,10 +1,10 @@
 function [reg1,reg2] = normalize_openmc(reg1,reg2)
 
 % get x vectors
-dx1 = reg1.L/size(reg1.form.flux,2);
-x1 = linspace(0 + dx1/2, reg1.L - dx1/2, size(reg1.form.flux,2));
-dx2 = reg2.L/size(reg2.form.flux,2);
-x2 = linspace(0 + dx2/2, reg2.L - dx2/2, size(reg2.form.flux,2));
+dx1 = reg1.L/size(reg1.form.flux,2)/2;
+x1 = linspace(0 + dx1/2, reg1.L - dx1/2, size(reg1.form.flux,2)*2);
+dx2 = reg2.L/size(reg2.form.flux,2)/2;
+x2 = linspace(0 + dx2/2, reg2.L - dx2/2, size(reg2.form.flux,2)*2);
 
 % integrate form functions
 phireg1g1 = sum(reg1.form.flux(1,:));

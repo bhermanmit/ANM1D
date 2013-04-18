@@ -215,13 +215,19 @@ reg(2).iphi1 = quad(reg(2).phi1,0,L2,1e-16);
 reg(2).iphi2 = quad(reg(2).phi2,0,L2,1e-16);
 
 % calculate normalization factor
+reg1.flux = sum(reg2.meshflux(:,1:320),2);
+reg2.flux = sum(reg2.meshflux(:,321:640),2);
 norm = (sum(reg1.flux)+sum(reg2.flux))/(reg(1).iphi1+reg(1).iphi2+reg(2).iphi1+reg(2).iphi2);
 
 % adjust fluxes
-reg(1).phi1 = @(x) norm*reg(1).phi1(x);
-reg(1).phi2 = @(x) norm*reg(1).phi2(x);
-reg(2).phi1 = @(x) norm*reg(2).phi1(x);
-reg(2).phi2 = @(x) norm*reg(2).phi2(x);
+% reg(1).phi1 = @(x) norm*reg(1).phi1(x);
+% reg(1).phi2 = @(x) norm*reg(1).phi2(x);
+% reg(2).phi1 = @(x) norm*reg(2).phi1(x);
+% reg(2).phi2 = @(x) norm*reg(2).phi2(x);
+reg(1).phi1 = @(x) reg(1).phi1(x)*reg1.flux(1)/reg(1).iphi1;
+reg(1).phi2 = @(x) reg(1).phi2(x)*reg1.flux(2)/reg(1).iphi2;
+reg(2).phi1 = @(x) reg(2).phi1(x)*reg2.flux(1)/reg(2).iphi1;
+reg(2).phi2 = @(x) reg(2).phi2(x)*reg2.flux(2)/reg(2).iphi2;
 
 % save fluxes in output object
 reg1.ANMphi1 = reg(1).phi1;

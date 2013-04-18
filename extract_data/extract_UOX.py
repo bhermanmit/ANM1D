@@ -71,16 +71,26 @@ class MeshData:
             self.chi[i] = sum(self.nfiss[:,i])/totnfiss
 
     def process_current(self,tally_id,score_id,surf):
-        self.curr = np.zeros(self.ng)
+        if surf == 'left':
+            self.currL = np.zeros(self.ng)
+        else:
+            self.currR = np.zeros(self.ng)
         partial_currents = self.extract_mean(tally_id,score_id)
         for i in range(self.ng):
             if surf == 'left':
-                self.curr[i] = partial_currents[1,i,1,1,0] - \
+                self.currL[i] = partial_currents[1,i,1,1,0] - \
                                partial_currents[0,i,1,1,0]
+                print partial_currents[1,i,1,1,0],partial_currents[0,i,1,1,0]
+                print 'Left Current:',self.currL[i]
             elif surf == 'right':
-                self.curr[i] = partial_currents[1,i,1,1,1] - \
+                self.currR[i] = partial_currents[1,i,1,1,1] - \
                                partial_currents[0,i,1,1,1]
-        self.curr = self.curr[::-1]
+                print partial_currents[1,i,1,1,1],partial_currents[0,i,1,1,1]
+                print 'Right Current:',self.currR[i]
+        if surf == 'left':
+            self.currL = self.currL[::-1]
+        else:
+            self.currR = self.currR[::-1]
 
     def write_matlab_binary(self):
         mdict = { 'flux':self.flux,
@@ -91,7 +101,8 @@ class MeshData:
                   'nsigf':self.nfissvec,
                   'chi':self.chi,
                   'diff':self.diff,
-                  'curr':self.curr,
+                  'currL':self.currL,
+                  'currR':self.currR,
                   'keff':self.keff,
                   'H1totalrate':self.H1totalrate,
                   'totalrate':self.totalrate,
@@ -157,7 +168,8 @@ def main(statepoint_file_both, statepoint_file_SA):
     reg1.process_nuscattmat(2,'nu-scatter')
     reg1.process_nufissmat(2,'nu-fission')
     reg1.calc_nfissvec()
-    reg1.curr = [0.0,0.0]
+    reg1.currL = [0.0,0.0]
+    reg1.currR = [0.0,0.0]
     reg1.process_meshflux(5,'flux')
     reg1.process_meshnufission(5,'nu-fission')
     reg1.process_H1totalrate(3,'total',1001)
@@ -174,6 +186,7 @@ def main(statepoint_file_both, statepoint_file_SA):
     reg2.process_nufissmat(4,'nu-fission')
     reg2.calc_nfissvec()
     reg2.process_current(6,'current','left')
+    reg2.process_current(6,'current','right')
     reg2.process_meshflux(11,'flux')
     reg2.process_meshnufission(11,'nu-fission')
     reg2.process_H1totalrate(8,'total',1001)
