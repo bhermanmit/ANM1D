@@ -199,20 +199,20 @@ reg(2).phi2 = @(x) reg(2).v21(keff)*reg(2).a*cos(sqrt(reg(2).lamb1(keff))*(x-L2)
     reg(2).v22(keff)*reg(2).c*cosh(sqrt(-reg(2).lamb2(keff))*(x-L2));
 
 % integral of fluxes
-reg(1).iphi1 = reg(1).v11(keff)*reg(1).a/sqrt(reg(1).lamb1(keff))*sin(sqrt(reg(1).lamb1(keff))*L1) + ...
-    reg(1).v12(keff)*reg(1).c/sqrt(-reg(1).lamb2(keff))*sinh(sqrt(-reg(1).lamb2(keff))*L1);
-reg(1).iphi2 = reg(1).v21(keff)*reg(1).a/sqrt(reg(1).lamb1(keff))*sin(sqrt(reg(1).lamb1(keff))*L1) + ...
-    reg(1).v22(keff)*reg(1).c/sqrt(-reg(1).lamb2(keff))*sinh(sqrt(-reg(1).lamb2(keff))*L1);
-reg(2).iphi1 = reg(2).v11(keff)*reg(2).a/sqrt(reg(2).lamb1(keff))*sin(sqrt(reg(2).lamb1(keff))*L2) + ...
-    reg(2).v12(keff)*reg(2).c/sqrt(-reg(2).lamb2(keff))*sinh(sqrt(-reg(2).lamb2(keff))*L2);
-reg(2).iphi2 = reg(2).v21(keff)*reg(2).a/sqrt(reg(2).lamb1(keff))*sin(sqrt(reg(2).lamb1(keff))*L2) + ...
-    reg(2).v22(keff)*reg(2).c/sqrt(-reg(2).lamb2(keff))*sinh(sqrt(-reg(2).lamb2(keff))*L2);
+% reg(1).iphi1 = reg(1).v11(keff)*reg(1).a/sqrt(reg(1).lamb1(keff))*sin(sqrt(reg(1).lamb1(keff))*L1) + ...
+%     reg(1).v12(keff)*reg(1).c/sqrt(-reg(1).lamb2(keff))*sinh(sqrt(-reg(1).lamb2(keff))*L1);
+% reg(1).iphi2 = reg(1).v21(keff)*reg(1).a/sqrt(reg(1).lamb1(keff))*sin(sqrt(reg(1).lamb1(keff))*L1) + ...
+%     reg(1).v22(keff)*reg(1).c/sqrt(-reg(1).lamb2(keff))*sinh(sqrt(-reg(1).lamb2(keff))*L1);
+% reg(2).iphi1 = reg(2).v11(keff)*reg(2).a/sqrt(reg(2).lamb1(keff))*sin(sqrt(reg(2).lamb1(keff))*L2) + ...
+%     reg(2).v12(keff)*reg(2).c/sqrt(-reg(2).lamb2(keff))*sinh(sqrt(-reg(2).lamb2(keff))*L2);
+% reg(2).iphi2 = reg(2).v21(keff)*reg(2).a/sqrt(reg(2).lamb1(keff))*sin(sqrt(reg(2).lamb1(keff))*L2) + ...
+%     reg(2).v22(keff)*reg(2).c/sqrt(-reg(2).lamb2(keff))*sinh(sqrt(-reg(2).lamb2(keff))*L2);
 
 % integral of fluxes
-reg(1).iphi1 = quad(reg(1).phi1,0,L1,1e-16);
-reg(1).iphi2 = quad(reg(1).phi2,0,L1,1e-16);
-reg(2).iphi1 = quad(reg(2).phi1,0,L2,1e-16);
-reg(2).iphi2 = quad(reg(2).phi2,0,L2,1e-16);
+reg(1).iphi1 = integral(reg(1).phi1,0,L1,'AbsTol',1e-16);
+reg(1).iphi2 = integral(reg(1).phi2,0,L1,'AbsTol',1e-16);
+reg(2).iphi1 = integral(reg(2).phi1,0,L2,'AbsTol',1e-16);
+reg(2).iphi2 = integral(reg(2).phi2,0,L2,'AbsTol',1e-16);
 
 % calculate normalization factor
 reg1.flux = sum(reg2.meshflux(:,1:320),2);

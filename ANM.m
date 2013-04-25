@@ -13,10 +13,10 @@ reg1SA = load('./extract_data/reg1SA.mat');
 reg2SA = load('./extract_data/reg2SA.mat');
 reg2.chi(:) = 0;
 reg2SA.chi(:) = 0;
-reg1.keff = 1.03035;
-reg2.keff = 1.03035;
-reg1SA.keff = 1.03035;
-reg2SA.keff = 1.03035;
+reg1.keff = 1.02471;
+reg2.keff = 1.02471;
+reg1SA.keff = 1.02471;
+reg2SA.keff = 1.02471;
 
 % load in H1 correction curve
 H1 = load('H-1600corr.mat');
@@ -40,11 +40,11 @@ reg2.f(1:2) = 1;
 [reg1SA,reg2SA] = compute_diffusion(reg1SA,reg2SA,H1,difftype,corr);
 
 % compute discontinuity factors
-[reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,'adfs');
+[reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,'rdfs');
 % reg1.f = [9.905986239275264e-01     1.048814831170608e+00];
 % reg2.f = [1 1];
-reg1.f = [1 1];
-reg2.f = [1.110858237865663e+00     8.385291258745322e-01];
+% reg1.f = [1 1];
+% reg2.f = [1.110858237865663e+00     8.385291258745322e-01];
 
 % compute reference solution
 [reg1,reg2] = ANM_solve_fluxes(reg1,reg2);
