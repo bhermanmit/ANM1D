@@ -19,7 +19,7 @@ reg1SA.keff = 1.03035;
 reg2SA.keff = 1.03035;
 
 % load in H1 correction curve
-H1 = load('../correction_curve/PN_buckling/src/H-1600corr.mat');
+H1 = load('H-1600corr.mat');
 
 % set lengths
 reg1.L = 10.07872*2;
@@ -60,7 +60,7 @@ reg1SA.f = [1 1];
 %reg2SA.f = [1 1];
 
 % solve for fluxes
-[regSA1,reg2SA] = ANM_solve_fluxes(reg1SA,reg2SA);
+[reg1SA,reg2SA] = ANM_solve_fluxes(reg1SA,reg2SA);
 
 % plot fluxes
 x1 = linspace(0,reg1.L,1000);
