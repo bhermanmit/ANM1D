@@ -9,13 +9,14 @@ corr = 'yes';
 % load in xs data
 reg1 = load('./extract_data/reg1.mat');
 reg2 = load('./extract_data/reg2.mat');
+reg1SA = load('./extract_data/reg1SA.mat');
+reg2SA = load('./extract_data/reg2SA.mat');
 reg2.chi(:) = 0;
+reg2SA.chi(:) = 0;
 reg1.keff = 1.03035;
 reg2.keff = 1.03035;
-
-% load in form functions
-reg1.form = load('./extract_data/reg1form.mat');
-reg2.form = load('./extract_data/reg2form.mat');
+reg1SA.keff = 1.03035;
+reg2SA.keff = 1.03035;
 
 % load in H1 correction curve
 H1 = load('../correction_curve/PN_buckling/src/H-1600corr.mat');
@@ -23,6 +24,8 @@ H1 = load('../correction_curve/PN_buckling/src/H-1600corr.mat');
 % set lengths
 reg1.L = 10.07872*2;
 reg2.L = 10.07872*2;
+reg1SA.L = 10.07872*2;
+reg2SA.L = 10.07872*2;
 
 % set RDFs to 1
 reg1.f(1:2) = 1;
@@ -30,73 +33,55 @@ reg2.f(1:2) = 1;
 
 % compute neutron balance
 [reg1,reg2] = neutron_balance(reg1,reg2);
+[reg1SA,reg2SA] = neutron_balance(reg1SA,reg2SA);
 
 % compute diffusion coefficients
 [reg1,reg2] = compute_diffusion(reg1,reg2,H1,difftype,corr);
-
-% normalize OpenMC distributions to average integrated fluxes
-% [reg1,reg2] = normalize_openmc(reg1,reg2);
-
-% solve for fluxes
-% [reg1,reg2] = ANM_solve_fluxes(reg1,reg2);
+[reg1SA,reg2SA] = compute_diffusion(reg1SA,reg2SA,H1,difftype,corr);
 
 % compute discontinuity factors
-[reg1,reg2] = ANM_compute_discontinuity(reg1,reg2);
+[reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,'adfs');
+% reg1.f = [9.905986239275264e-01     1.048814831170608e+00];
+% reg2.f = [1 1];
+reg1.f = [1 1];
+reg2.f = [1.110858237865663e+00     8.385291258745322e-01];
 
-if strcmp(difftype,'diffusion') && strcmp(corr,'no')
-    reg1.f = [1,1];
-    reg2.f = [1.129017141577661e+00     9.541851808285199e-01];
-elseif strcmp(difftype,'diffusion') && strcmp(corr,'yes')
-    reg1.f = [1,1];
-    reg2.f = [1.059995751720245e+00     8.940975534594744e-01];
-end
-
-% solve for fluxes
+% compute reference solution
 [reg1,reg2] = ANM_solve_fluxes(reg1,reg2);
 
-% reconstruct fluxes
-% [reg1,reg2] = ANM_reconstruct_fluxes(reg1,reg2);
+% copy over discontinuity factors
+[reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,'adfs');
+reg2SA.f = reg2.f;
+%reg1SA.f = reg1.f;
+[reg1SA,reg2] = ANM_compute_discontinuity(reg1SA,reg2,'adfs');
+%reg2SA.f = reg2.f;
+reg1SA.f = [1 1];
+%reg2SA.f = [1.110858237865663e+00     8.385291258745322e-01];
+%reg2SA.f = [1 1];
 
-% reconstruct nu-fission
-% [reg1,reg2,err] = ANM_reconstruct_nufission(reg1,reg2);
+% solve for fluxes
+[regSA1,reg2SA] = ANM_solve_fluxes(reg1SA,reg2SA);
 
 % plot fluxes
 x1 = linspace(0,reg1.L,1000);
 x2 = linspace(0,reg2.L,1000);
-dx1 = reg1.L/size(reg1.form.flux,2)/2;
+dx1 = reg1.L/(size(reg1.meshflux,2)/2);
 x1het = linspace(0 + dx1/2, reg1.L - dx1/2, size(reg2.meshflux,2)/2);
-dx2 = reg2.L/size(reg2.form.flux,2)/2;
+dx2 = reg2.L/(size(reg2.meshflux,2)/2);
 x2het = linspace(0 + dx2/2, reg2.L - dx2/2, size(reg2.meshflux,2)/2);
 
 figure(1)
 %hold off
-plot(x1,reg1.ANMphi1(x1));
+plot(x1,reg1SA.ANMphi1(x1),'b--');
 hold on
-plot(x2+reg1.L,reg2.ANMphi1(x2),'r');
+plot(x2+reg1.L,reg2SA.ANMphi1(x2),'r--');
 title('Group 1 Flux');
-% plot(x1het,reg1.homflux(1,:),'k')
-% plot(x2het + reg1.L,reg2.homflux(1,:),'k') 
 plot([x1het,x2het + reg1.L],reg2.meshflux(1,:)/dx1,'k')
 
 figure(2)
 %hold off
-plot(x1,reg1.ANMphi2(x1));
+plot(x1,reg1SA.ANMphi2(x1),'b--');
 hold on
-plot(x1+reg1.L,reg2.ANMphi2(x2),'r');
+plot(x1+reg1.L,reg2SA.ANMphi2(x2),'r--');
 title('Group 2 Flux');
-% plot(x1het,reg1.homflux(2,:),'k')
-% plot(x2het + reg1.L,reg2.homflux(2,:),'k')
 plot([x1het,x2het + reg1.L],reg2.meshflux(2,:)/dx2,'k')
-
-% figure(3)
-% plot(reg1.MCpinpower)
-% hold on
-% plot(reg1.pinpower,'k.')
-% plot(9:16,reg2.pinpower,'k.')
-% 
-% figure(4)
-% plot(x1het,reg1.ANMphi1(x1het)./reg1.ANMphi2(x1het),'r')
-% hold on
-% plot(x2het+reg1.L,reg2.ANMphi1(x2het)./reg2.ANMphi2(x2het),'b')
-% plot([x1het,x2het + reg1.L],reg2.meshflux(1,:)./reg2.meshflux(2,:),'k')
-

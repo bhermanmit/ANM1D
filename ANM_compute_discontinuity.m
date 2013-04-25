@@ -1,4 +1,4 @@
-function [reg1,reg2] = ANM_compute_discontinuity(reg1,reg2)
+function [reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,dfs)
 
 % geometry
 L1 = reg1.L;
@@ -119,18 +119,33 @@ reg(2).phi1 = @(x) reg(2).v11(reg2.keff)*reg(2).a*cos(sqrt(reg(2).lamb1(reg2.kef
 reg(2).phi2 = @(x) reg(2).v21(reg2.keff)*reg(2).a*cos(sqrt(reg(2).lamb1(reg2.keff))*(x-L2)) + ...
     reg(2).v22(reg2.keff)*reg(2).c*cosh(sqrt(-reg(2).lamb2(reg2.keff))*(x-L2));
 
+
 % save fluxes in output object
-reg1.f(1) = 1/reg(1).phi1(L1);
-reg1.f(2) = 1/reg(1).phi2(L1);
-reg2.f(1) = 1/reg(2).phi1(0);
-reg2.f(2) = 1/reg(2).phi2(0);
+dx = 6.299200000000001e-02;
+meshflux = reg1.meshflux;
+if strcmp(dfs,'rdfs')
+    meshflux(:,:) = 1;
+end
+if reg(1).phi1(L1) - 0.0 < 1e-8
+   reg(1).phi1 = @(x) reg1.flux(1)/reg1.L;
+   reg(1).phi2 = @(x) reg1.flux(2)/reg1.L;
+end
+
+reg1.f(1) = meshflux(1,320)/dx/reg(1).phi1(L1);
+reg1.f(2) = meshflux(2,320)/dx/reg(1).phi2(L1);
+if size(meshflux,2) > 320
+    reg2.f(1) = meshflux(1,321)/dx/reg(2).phi1(0);
+    reg2.f(2) = meshflux(2,321)/dx/reg(2).phi2(0);
+end
 
 % readjust RDFs
-c = reg1.f(1)/reg2.f(1);
-reg2.f(1) = 2/(1+c);
-reg1.f(1) = 2 - reg2.f(1);
-c = reg1.f(2)/reg2.f(2);
-reg2.f(2) = 2/(1+c);
-reg1.f(2) = 2 - reg2.f(2);
+if strcmp(dfs,'rdfs')
+    c = reg1.f(1)/reg2.f(1);
+    reg2.f(1) = 2/(1+c);
+    reg1.f(1) = 2 - reg2.f(1);
+    c = reg1.f(2)/reg2.f(2);
+    reg2.f(2) = 2/(1+c);
+    reg1.f(2) = 2 - reg2.f(2);
+end
 
 end
