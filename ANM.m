@@ -4,7 +4,7 @@ clear
 
 % type of diffusion coefficients
 difftype = 'diffusion';
-corr = 'no';
+corr = 'yes';
 
 % load in xs data
 reg1 = load('./extract_data/reg1.mat');
@@ -18,7 +18,7 @@ reg1.form = load('./extract_data/reg1form.mat');
 reg2.form = load('./extract_data/reg2form.mat');
 
 % load in H1 correction curve
-H1 = load('../correction_curve/PN_buckling/src/H-1600corr.mat');
+H1 = load('H-1600corr.mat');
 
 % set lengths
 reg1.L = 10.07872;
