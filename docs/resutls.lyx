@@ -60,7 +60,7 @@
 \begin_body
 
 \begin_layout Title
-Fuel-Reflector Homogenization
+Fuel-Baffle-Reflector Homogenization
 \end_layout
 
 \begin_layout Author
@@ -84,12 +84,12 @@ Geometry
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename figs/UOX_H2O.png
+	filename figs/BAFFLE.png
 	scale 15
 
 \end_inset
@@ -101,7 +101,7 @@ status collapsed
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Fuel Lattice - Reflector Geometry
+Fuel Lattice - Baffle - Reflector Geometry
 \end_layout
 
 \end_inset
@@ -205,7 +205,7 @@ Results
 \end_layout
 
 \begin_layout Standard
-The k-effective for this system is 1.03035.
+The k-effective for this system is 1.02471.
  The reference spatial flux distribution in group 1 and 2 are shown in Figures
  
 \begin_inset CommandInset ref
@@ -229,7 +229,7 @@ reference "fig:refflux2"
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -274,7 +274,7 @@ name "fig:refflux1"
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
