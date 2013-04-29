@@ -41,10 +41,6 @@ reg2.f(1:2) = 1;
 
 % compute discontinuity factors
 [reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,'adfs');
-% reg1.f = [9.905986239275264e-01     1.048814831170608e+00];
-% reg2.f = [1 1];
-reg1.f = [1 1];
-reg2.f = [1.110858237865663e+00     8.385291258745322e-01];
 
 % compute reference solution
 [reg1,reg2] = ANM_solve_fluxes(reg1,reg2);
@@ -52,15 +48,14 @@ reg2.f = [1.110858237865663e+00     8.385291258745322e-01];
 % copy over discontinuity factors
 [reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,'adfs');
 reg2SA.f = reg2.f;
-%reg1SA.f = reg1.f;
 [reg1SA,reg2] = ANM_compute_discontinuity(reg1SA,reg2,'adfs');
-%reg2SA.f = reg2.f;
 reg1SA.f = [1 1];
-%reg2SA.f = [1.110858237865663e+00     8.385291258745322e-01];
-%reg2SA.f = [1 1];
+reg2SA.f = [1 1];
 
 % solve for fluxes
 [reg1SA,reg2SA] = ANM_solve_fluxes(reg1SA,reg2SA);
+% reg1.f = reg1SA.f;
+% [reg1,reg2SA] = ANM_solve_fluxes(reg1,reg2SA);
 
 % plot fluxes
 x1 = linspace(0,reg1.L,1000);
