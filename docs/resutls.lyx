@@ -409,7 +409,7 @@ Fuel
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.506
+1.495
 \end_layout
 
 \end_inset
@@ -418,7 +418,7 @@ Fuel
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.374
+0.376
 \end_layout
 
 \end_inset
@@ -438,7 +438,7 @@ Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.926
+1.336
 \end_layout
 
 \end_inset
@@ -447,7 +447,7 @@ Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.266
+0.270
 \end_layout
 
 \end_inset
@@ -575,7 +575,7 @@ Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.926
+1.336
 \end_layout
 
 \end_inset
@@ -584,7 +584,7 @@ Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.266
+0.270
 \end_layout
 
 \end_inset
@@ -734,7 +734,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.8713
+0.8554
 \end_layout
 
 \end_inset
@@ -743,7 +743,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.1287
+1.1446
 \end_layout
 
 \end_inset
@@ -752,7 +752,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.0407
+1.5769
 \end_layout
 
 \end_inset
@@ -761,7 +761,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.9593
+0.4231
 \end_layout
 
 \end_inset
@@ -781,7 +781,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.8912
+0.9327
 \end_layout
 
 \end_inset
@@ -790,7 +790,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.1383
+1.2397
 \end_layout
 
 \end_inset
@@ -799,7 +799,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.0331
+1.0196
 \end_layout
 
 \end_inset
@@ -808,7 +808,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.9742
+0.2623
 \end_layout
 
 \end_inset
@@ -837,7 +837,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.1383
+1.2397
 \end_layout
 
 \end_inset
@@ -855,7 +855,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.9742
+0.2623
 \end_layout
 
 \end_inset
@@ -884,7 +884,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.1383
+1.2397
 \end_layout
 
 \end_inset
@@ -902,7 +902,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.9742
+0.2623
 \end_layout
 
 \end_inset
@@ -931,7 +931,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.1383
+1.2397
 \end_layout
 
 \end_inset
@@ -949,7 +949,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.9742
+0.2623
 \end_layout
 
 \end_inset
@@ -1027,7 +1027,7 @@ Group 2 Reflector
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -1102,7 +1102,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.03035
+1.02471
 \end_layout
 
 \end_inset
@@ -1131,7 +1131,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.02986
+1.02357
 \end_layout
 
 \end_inset
@@ -1140,7 +1140,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
--46
+-108
 \end_layout
 
 \end_inset
@@ -1160,7 +1160,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.02236
+1.01917
 \end_layout
 
 \end_inset
@@ -1169,7 +1169,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
--759
+-530
 \end_layout
 
 \end_inset
@@ -1189,7 +1189,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.02756
+1.02491
 \end_layout
 
 \end_inset
@@ -1198,7 +1198,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
--264
+18
 \end_layout
 
 \end_inset
@@ -1218,7 +1218,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.02789
+1.02505
 \end_layout
 
 \end_inset
@@ -1227,7 +1227,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
--232
+33
 \end_layout
 
 \end_inset
@@ -1247,7 +1247,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.02011
+1.03586
 \end_layout
 
 \end_inset
@@ -1256,7 +1256,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
--975
+1050
 \end_layout
 
 \end_inset
@@ -1377,7 +1377,7 @@ Fuel
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.423
+1.415
 \end_layout
 
 \end_inset
@@ -1386,7 +1386,7 @@ Fuel
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.380
+0.383
 \end_layout
 
 \end_inset
@@ -1406,7 +1406,7 @@ Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.619
+1.263
 \end_layout
 
 \end_inset
@@ -1415,7 +1415,7 @@ Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.269
+0.273
 \end_layout
 
 \end_inset
@@ -1539,7 +1539,7 @@ Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.619
+1.263
 \end_layout
 
 \end_inset
@@ -1548,7 +1548,7 @@ Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.269
+0.273
 \end_layout
 
 \end_inset
@@ -1592,7 +1592,7 @@ reference "tab:assdiffH1"
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -1684,7 +1684,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.9403
+0.8919
 \end_layout
 
 \end_inset
@@ -1693,7 +1693,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.0597
+1.1081
 \end_layout
 
 \end_inset
@@ -1702,7 +1702,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.1010
+1.5929
 \end_layout
 
 \end_inset
@@ -1711,7 +1711,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.8990
+0.4071
 \end_layout
 
 \end_inset
@@ -1731,7 +1731,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.9411
+0.9776
 \end_layout
 
 \end_inset
@@ -1740,7 +1740,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.0457
+1.2063
 \end_layout
 
 \end_inset
@@ -1749,7 +1749,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.0547
+1.0572
 \end_layout
 
 \end_inset
@@ -1758,7 +1758,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.8810
+0.2591
 \end_layout
 
 \end_inset
@@ -1787,7 +1787,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.0457
+1.2063
 \end_layout
 
 \end_inset
@@ -1805,7 +1805,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.8810
+0.2591
 \end_layout
 
 \end_inset
@@ -1834,7 +1834,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.0457
+1.2063
 \end_layout
 
 \end_inset
@@ -1852,7 +1852,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.8810
+0.2591
 \end_layout
 
 \end_inset
@@ -1881,7 +1881,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.0457
+1.2063
 \end_layout
 
 \end_inset
@@ -1899,7 +1899,7 @@ Group 2 Reflector
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.8810
+0.2591
 \end_layout
 
 \end_inset
@@ -1977,7 +1977,7 @@ Group 2 Reflector
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -2052,7 +2052,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.03035
+1.02471
 \end_layout
 
 \end_inset
@@ -2081,7 +2081,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.02994
+1.02363
 \end_layout
 
 \end_inset
@@ -2090,7 +2090,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
--39
+-103
 \end_layout
 
 \end_inset
@@ -2110,7 +2110,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.02679
+1.02293
 \end_layout
 
 \end_inset
@@ -2119,7 +2119,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
--337
+-170
 \end_layout
 
 \end_inset
@@ -2139,7 +2139,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.03171
+1.02858
 \end_layout
 
 \end_inset
@@ -2148,7 +2148,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-128
+367
 \end_layout
 
 \end_inset
@@ -2168,7 +2168,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.03212
+1.02874
 \end_layout
 
 \end_inset
@@ -2177,7 +2177,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-167
+383
 \end_layout
 
 \end_inset
@@ -2197,7 +2197,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.03198
+1.04185
 \end_layout
 
 \end_inset
@@ -2206,7 +2206,7 @@ Difference from reference [pcm]
 \begin_inset Text
 
 \begin_layout Plain Layout
-154
+1605
 \end_layout
 
 \end_inset

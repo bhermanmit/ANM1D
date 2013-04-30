@@ -8,44 +8,44 @@ reg1.finetransrate = reg1.totalrate - reg1.p1rate;
 reg2.finetransrate = reg2.totalrate - reg2.p1rate;
 
 % correction fine distibution
-if strcmp(corr,'yes')
-    
-    % calculate H-1 transport rate
-    reg1.H1finetransrate = reg1.H1totalrate(1:46) - reg1.H1p1rate(1:46);
-    reg2.H1finetransrate = reg2.H1totalrate(1:46) - reg2.H1p1rate(1:46);
-    
-    % remove this from fine transport rate
-    reg1.finetransrate(1:46) = reg1.finetransrate(1:46) - reg1.H1finetransrate(1:46);
-    reg2.finetransrate(1:46) = reg2.finetransrate(1:46) - reg2.H1finetransrate(1:46);
-    
-    % compute actual H1 fine transport rate
-    reg1.H1finetransrate(1:46) = reg1.H1totalrate(1:46).*H1.H1rat(1:46);
-    reg2.H1finetransrate(1:46) = reg2.H1totalrate(1:46).*H1.H1rat(1:46);
-    
-    % add H1 back to fine transport rate
-    reg1.finetransrate(1:46) = reg1.finetransrate(1:46) + reg1.H1finetransrate(1:46);
-    reg2.finetransrate(1:46) = reg2.finetransrate(1:46) + reg2.H1finetransrate(1:46);
-    
-end
 % if strcmp(corr,'yes')
 %     
 %     % calculate H-1 transport rate
-%     reg1.H1finetransrate = reg1.H1totalrate - reg1.H1p1rate;
-%     reg2.H1finetransrate = reg2.H1totalrate - reg2.H1p1rate;
+%     reg1.H1finetransrate = reg1.H1totalrate(1:46) - reg1.H1p1rate(1:46);
+%     reg2.H1finetransrate = reg2.H1totalrate(1:46) - reg2.H1p1rate(1:46);
 %     
 %     % remove this from fine transport rate
-%     reg1.finetransrate = reg1.finetransrate - reg1.H1finetransrate;
-%     reg2.finetransrate = reg2.finetransrate - reg2.H1finetransrate;
+%     reg1.finetransrate(1:46) = reg1.finetransrate(1:46) - reg1.H1finetransrate(1:46);
+%     reg2.finetransrate(1:46) = reg2.finetransrate(1:46) - reg2.H1finetransrate(1:46);
 %     
 %     % compute actual H1 fine transport rate
-%     reg1.H1finetransrate = reg1.H1totalrate.*H1.H1rat;
-%     reg2.H1finetransrate = reg2.H1totalrate.*H1.H1rat;
+%     reg1.H1finetransrate(1:46) = reg1.H1totalrate(1:46).*H1.H1rat(1:46);
+%     reg2.H1finetransrate(1:46) = reg2.H1totalrate(1:46).*H1.H1rat(1:46);
 %     
 %     % add H1 back to fine transport rate
-%     reg1.finetransrate = reg1.finetransrate + reg1.H1finetransrate;
-%     reg2.finetransrate = reg2.finetransrate + reg2.H1finetransrate;
+%     reg1.finetransrate(1:46) = reg1.finetransrate(1:46) + reg1.H1finetransrate(1:46);
+%     reg2.finetransrate(1:46) = reg2.finetransrate(1:46) + reg2.H1finetransrate(1:46);
 %     
 % end
+if strcmp(corr,'yes')
+    
+    % calculate H-1 transport rate
+    reg1.H1finetransrate = reg1.H1totalrate - reg1.H1p1rate;
+    reg2.H1finetransrate = reg2.H1totalrate - reg2.H1p1rate;
+    
+    % remove this from fine transport rate
+    reg1.finetransrate = reg1.finetransrate - reg1.H1finetransrate;
+    reg2.finetransrate = reg2.finetransrate - reg2.H1finetransrate;
+    
+    % compute actual H1 fine transport rate
+    reg1.H1finetransrate = reg1.H1totalrate.*H1.H1rat;
+    reg2.H1finetransrate = reg2.H1totalrate.*H1.H1rat;
+    
+    % add H1 back to fine transport rate
+    reg1.finetransrate = reg1.finetransrate + reg1.H1finetransrate;
+    reg2.finetransrate = reg2.finetransrate + reg2.H1finetransrate;
+    
+end
 
 switch(difftype)
     

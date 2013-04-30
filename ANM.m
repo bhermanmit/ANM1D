@@ -4,7 +4,7 @@ clear
 
 % type of diffusion coefficients
 difftype = 'diffusion';
-corr = 'no';
+corr = 'yes';
 
 % load in xs data
 reg1 = load('./extract_data/reg1.mat');
@@ -40,7 +40,7 @@ reg2.f(1:2) = 1;
 [reg1SA,reg2SA] = compute_diffusion(reg1SA,reg2SA,H1,difftype,corr);
 
 % compute discontinuity factors
-[reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,'rdfs');
+[reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,'adfs');
 
 % compute reference solution
 [reg1,reg2] = ANM_solve_fluxes(reg1,reg2);
@@ -49,8 +49,8 @@ reg2.f(1:2) = 1;
 [reg1,reg2] = ANM_compute_discontinuity(reg1,reg2,'adfs');
 reg2SA.f = reg2.f;
 [reg1SA,reg2] = ANM_compute_discontinuity(reg1SA,reg2,'adfs');
-reg1SA.f = [1 1];
-reg2SA.f = [1 1];
+%reg1SA.f = [1 1];
+%reg2SA.f = [1 1];
 
 % solve for fluxes
 [reg1SA,reg2SA] = ANM_solve_fluxes(reg1SA,reg2SA);
